@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Pyaterochka",
+        "product": "Moloko",
+        "price": 68
+    },
+    {
+        "name": "Ashan",
+        "product": "Liji",
+        "price": 2500
+    },
+    {
+        "name": "Magnit",
+        "product": "Luk",
+        "price": 35
+    },
+    {
+        "name": "Pyaterochka",
+        "product": "Sir",
+        "price": 220
+    },
+    {
+        "name": "FixPrice",
+        "product": "chipsi",
+        "price": "92"
+    }
+]
