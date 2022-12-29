@@ -18,5 +18,10 @@
         "name": "Pyaterochka",
         "product": "Sir",
         "price": 220
+    },
+    {
+        "name": "FixPrice",
+        "product": "chipsi",
+        "price": "92"
     }
 ]
