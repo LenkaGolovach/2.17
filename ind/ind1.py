@@ -3,7 +3,7 @@
 import argparse
 import json
 import os
-import jsonschema
+
 
 
 def get_shop(shops, name, product, price):

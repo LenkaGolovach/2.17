@@ -6,7 +6,18 @@ import json
 import click
 
 
-def get_shop(shops_load, name, product, price, file_name):
+@click.group()
+def group():
+    pass
+
+
+@group.command()
+@click.argument('file_name')
+@click.option("-n", "--name")
+@click.option("-p", "--product")
+@click.option("-pr", "--price")
+def get_shop(file_name, name, product, price,):
+    shops_load = load_shops(file_name)
     shops_load.append({
         'name': name,
         'product': product,
@@ -17,11 +28,14 @@ def get_shop(shops_load, name, product, price, file_name):
     return shops_load
 
 
-def display_shops(shops_load):
+@group.command()
+@click.argument('file_name')
+def display_shops(file_name):
     """
     Отображает данные о товаре в виде таблицы и
     Сортирует данные, по названию маганзина
     """
+    shops_load = load_shops(file_name)
     if shops_load:
         line = '+-{}-+-{}-+-{}-+-{}-+'.format(
             '-' * 4,
@@ -53,14 +67,18 @@ def display_shops(shops_load):
             print(line)
 
 
-def select_shops(shops_load, name):
+@group.command()
+@click.argument('file_name')
+@click.option("-n", "--name")
+def select_shops(file_name, name):
     """
     По заданому магазину находит товары, находящиеся в нем,
     если магазина нет - показывает соответсвующее сообщение
     """
+    shops_load = load_shops(file_name)
     cout = 0
     for i, shop in enumerate(shops_load, 1):
-        if (shop.get('name') == name):
+        if shop.get('name') == name:
             cout = 1
             print(
                 ' | {:<5} | {:<5} '.format(
@@ -78,22 +96,5 @@ def load_shops(file_name):
     return loadfile
 
 
-@click.command()
-@click.option("-c", "--command")
-@click.argument('file_name')
-@click.option("-n", "--name")
-@click.option("-p", "--product")
-@click.option("-pr", "--price")
-def main(command, name, product, price, file_name):
-    shops_load = load_shops(file_name)
-    if command == 'add':
-        get_shop(shops_load, name, product, price, file_name)
-        click.secho('Данные добавлены')
-    elif command == 'display':
-        display_shops(shops_load)
-    elif command == 'select':
-        select_shops(shops_load, name)
-
-
 if __name__ == '__main__':
-    main()
+    group()
